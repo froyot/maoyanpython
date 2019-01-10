@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>{{ page.page_title }}</title>
+    {{ echarts_js_dependencies(page) }}
+
+<style type="text/css">
+	#wowrdcloud{
+		text-align: center;
+	}
+	#wowrdcloud img{
+		max-width: 300px;
+	}
+	#score{
+		color:red;
+	}
+	#score_num{
+		font-size: 0.8em;
+	}
+	#movie-info span{
+		margin-top:0.1em;
+	
+	}
+	.line-item{
+		display: block;
+	}
+
+	#chart-graph{
+		width: 100%;
+		text-align: center;
+	}
+	#chart-graph>div{
+		margin: auto;
+	}
+</style>
+
+</head>
+<body>
+	<div id="movie-info">
+		<h3>{{ movie.ch_name }}</h3>
+		<span>上映时间:{{movie.release_date}}</span>
+		<span>导演:{{movie.director}}</span>
+		<span>主演:{{movie.star}}</span>
+		<span id="score">评分:{{ movie.score }}</span><span id="score_num"> 评价人数:{{ movie.score_num}}</span>
+		<div id="movie-description">{{ movie.description }}</div>
+		<div id="wowrdcloud">
+    		<img src="{{wowrdcloudurl}}" />
+    		<img src="{{movie.cover}}"/>
+    	</div>
+	</div>
+	<div id="chart-graph">
+    {% for chart in page %}
+        {{ echarts_container(chart) }}
+    {% endfor %}
+    </div>
+    {{ echarts_js_content(*page) }}
+
+
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+
+</body>
+</html>
